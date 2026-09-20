@@ -1,0 +1,25 @@
+$table->enum()
+Edyan ishi: Maglumatlar bazasynyň tablisasynda diňe belli bir bahalary kabul edip bilýän ýörite sütün döredýär. Meselem: diňe "işjeň" ýa-da "passiw" diýen ýaly çäkli opsiýalar.
+Ulanlýan yeri: Migrationsda ulanylyar.
+meselem sular yaly: $table->enum('status', ['active', 'passiv']); diysen, sol sutune basga hi hili soz yazyp bolmaya.
+
+
+2. fake()->name()
+Edyan ishi: proyekti test etmek ucin awtomatiki yalan fake adam atlaryny doredip berya
+Ulanlyan yerleri: Esasan factory fayllarynda database seeder islerinde bazany fake maglumatlar bilen doldurmak ucin ulanylyar isledilende her gezek islande fake adam ady doredyar (her gezek basga at).
+
+
+3. Route::middleware()
+Edyan ishi: Saytlarda girisi yagny logini gozegcilikde saklayan gorag yaly ulanylya. meselem dine login edenlerin girip biljek yollaryny kesgitleyar.
+Ulanlyan yerleri: routes folderde web.php faylynda, route yollaryny gorayjy hemem arada duryjy hokmunde ulanylyar.
+
+
+4. select()
+Edyan ishi: Databazada hemme maglumatlary dalde dine ozune gerek sutunleri saylap almaga komek edyar.
+Ulanlyan yerleri: Controllerde, query builder bilen maglumat cekilende  ulanylyar.
+Peydasy: hemme sutunleri cekenok dine gerek bolanyny alya web saytyn has calt islemegine komek edyar
+
+
+5. compact()
+Edyan ishi: controllerde doreden variable we on icindaki maglumatlary viewe ugratmak ucin ulanylyan gysga route yol funksiyasydyr
+Ulanylyan yerleri: Controllerde return view edilyan yerinde ulanylyar
