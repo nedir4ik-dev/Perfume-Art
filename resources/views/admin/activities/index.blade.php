@@ -315,7 +315,6 @@ $nextCleanupDate = $cleanupDate ?? \Carbon\Carbon::parse('first day of next mont
 
         filterButtons.forEach(btn => {
             btn.addEventListener('click', function() {
-                // Süzgüç düwmeleriniň active statusyny çalyşmak
                 filterButtons.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
 
@@ -343,14 +342,13 @@ $nextCleanupDate = $cleanupDate ?? \Carbon\Carbon::parse('first day of next mont
                     if (html.trim().length > 0) {
                         tbody.innerHTML = html;
 
-                        // Load More düwmesini gaýtadan dikeltmek we 2-nji sahypa bellemek
                         const loadMoreSection = document.getElementById('load-more-section');
                         loadMoreSection.innerHTML = `
                         <button id="load-more-btn" class="btn btn-load-more" data-next-page="2">
                             <i class="bi bi-arrow-down-short me-1"></i> Has köp görkez
                         </button>
                     `;
-                        initLoadMore(); // Täze düwmä event goşmak
+                        initLoadMore();
                     } else {
                         tbody.innerHTML = `
                         <tr>
@@ -373,7 +371,6 @@ $nextCleanupDate = $cleanupDate ?? \Carbon\Carbon::parse('first day of next mont
         const btn = document.getElementById('load-more-btn');
         if (!btn) return;
 
-        // Ýalňyşlyk bilen birnäçe gezek event birikdirilmezligi üçin
         const newBtn = btn.cloneNode(true);
         btn.parentNode.replaceChild(newBtn, btn);
 

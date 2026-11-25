@@ -135,7 +135,6 @@
 @endsection
 
 @section('scripts')
-{{-- Google reCAPTCHA v3 Scriptini ýükleýäris --}}
 <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
 
 <script>
@@ -147,16 +146,13 @@
         const email = document.getElementById('customer-email').value;
         const address = document.getElementById('customer-address').value;
 
-        // CHECKBOX BARLAGY
         const termsCheckbox = document.getElementById('terms-checkbox');
 
-        // 1. Meýdançalaryň dolulygyny barlamak
         if (!name || !phone) {
             alert("Hökman doldurylmaly ýerleri (At we Telefon) boş goýmaň!");
             return;
         }
 
-        // Checkbox barlagy (eger belgi goýulmadyk bolsa sargyt saklanýar)
         if (!termsCheckbox.checked) {
             alert("Sargydyňyzy tassyklamak üçin Hyzmat Şertlerini we Gizlinlik Syýasatyny kabul etmelisiniz!");
             return;
@@ -164,23 +160,20 @@
 
         const btn = document.getElementById('final-submit-btn');
 
-        // 2. Düwmäni bloklamak we Loading effekti
         btn.disabled = true;
         btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span> {{ __('app.sending') ?? 'IBERILÝÄR...' }}`;
 
-        // 3. reCAPTCHA v3 Tokenini almak
         grecaptcha.ready(function() {
             grecaptcha.execute("{{ get_setting('recaptcha_site_key') }}", {
                     action: 'checkout'
                 }).then(function(token) {
                     if (token) {
-                        // Token alyndy, indi maglumatlary ugradyp bileris
                         const data = {
                             customer_name: name,
                             customer_phone: phone,
                             customer_email: email,
                             customer_address: address,
-                            terms_accepted: document.getElementById('terms-checkbox').checked, // <--- INE ŞU SETIR HÖKMAN BOLMALY!
+                            terms_accepted: document.getElementById('terms-checkbox').checked,
                             'g-recaptcha-response': token,
                             _token: "{{ csrf_token() }}"
                         };
@@ -197,7 +190,6 @@
         });
     }
 
-    // Server bilen aragatnaşyk funksiýasy
     function sendRequest(data, btn) {
         fetch(ORDER_STORE_URL, {
                 method: 'POST',
@@ -220,7 +212,6 @@
                     localStorage.removeItem('cart');
                     if (typeof updateCartUI === "function") updateCartUI();
 
-                    // Üstünlikli sahypa
                     window.location.href = "{{ url('/success') }}?order_number=" + result.order_number;
                 } else {
                     alert(result.message);
@@ -234,7 +225,6 @@
             });
     }
 
-    // Düwmäni öňki ýagdaýyna getirmek
     function resetButton(btn) {
         btn.disabled = false;
         btn.innerText = "{{ __('app.checkout-confirm-btn') }}";

@@ -22,8 +22,8 @@ class ProductController extends Controller
         }
 
         // Diňe kerekli meýdanlary alýarys (çalt işlemesi üçin)
-        $products = Product::where('name', 'LIKE', "%{$term}%")
-            ->orWhere('description', 'LIKE', "%{$term}%")
+        $products = Product::where('name', 'ILIKE', "%{$term}%")
+            ->orWhere('description', 'ILIKE', "%{$term}%")
             ->select('id', 'name', 'slug')
             ->latest()
             ->limit(7) // Dropdown-a sypmar ýaly maksimum 7 sany görkezýäris
@@ -49,9 +49,9 @@ class ProductController extends Controller
             return response()->json([]);
         }
 
-        $products = Product::where('name', 'LIKE', "%{$term}%")
-            ->orWhere('description', 'LIKE', "%{$term}%")
-            ->orWhere('gender', 'LIKE', "%{$term}%")
+        $products = Product::where('name', 'ILIKE', "%{$term}%")
+            ->orWhere('description', 'ILIKE', "%{$term}%")
+            ->orWhere('gender', 'ILIKE', "%{$term}%")
             ->with(['brand', 'category'])
             ->latest()
             ->get();
@@ -100,8 +100,8 @@ class ProductController extends Controller
             ->when($request->max_price, fn($q, $max) => $q->where('price', '<=', $max))
             ->when($request->search, function ($q, $s) {
                 $q->where(function ($sub) use ($s) {
-                    $sub->where('name', 'LIKE', "%{$s}%")
-                        ->orWhere('description', 'LIKE', "%{$s}%");
+                    $sub->where('name', 'ILIKE', "%{$s}%")
+                        ->orWhere('description', 'ILIKE', "%{$s}%");
                 });
             })
             ->latest()

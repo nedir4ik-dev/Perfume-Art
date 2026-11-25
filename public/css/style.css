@@ -1,5 +1,7 @@
 .bg-image {
-    background: #111 url("../images/black-plain-concrete-textured-background.jpg") no-repeat fixed center / cover;
+    background: #111866
+        url("../images/black-plain-concrete-textured-background.jpg") no-repeat
+        fixed center / cover;
 }
 
 .bg-shadow {
@@ -18,7 +20,7 @@ a.hover-1:hover {
 }
 
 a.hover-1::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -5px;
     left: 0;
@@ -389,7 +391,6 @@ a.hover-1:hover::before {
 .custom-pagination .page-item.active .page-link {
     background: #0dcaf0be;
     backdrop-filter: blur(5px);
-    font-weight: bolder;
     color: #000;
 }
 
@@ -653,7 +654,9 @@ a.hover-1:hover::before {
     background: rgba(30, 41, 59, 0.4);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease;
 }
 
 .stat-card:hover {
@@ -734,15 +737,18 @@ a.hover-1:hover::before {
 }
 
 .fw-mono {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Courier New", Courier, monospace;
 }
-
 
 /* Hero Wrap */
 .hero-wrap {
     position: relative;
     overflow: hidden;
-    background: radial-gradient(circle at 70% 30%, rgba(13, 202, 240, 0.05) 0%, transparent 50%);
+    background: radial-gradient(
+        circle at 70% 30%,
+        rgba(13, 202, 240, 0.05) 0%,
+        transparent 50%
+    );
     margin-bottom: 50px;
 }
 
@@ -751,7 +757,11 @@ a.hover-1:hover::before {
     position: absolute;
     width: 60px;
     height: 60px;
-    background: radial-gradient(circle, rgba(13, 202, 240, 0.2) 0%, transparent 70%);
+    background: radial-gradient(
+        circle,
+        rgba(13, 202, 240, 0.2) 0%,
+        transparent 70%
+    );
     filter: blur(20px);
     border-radius: 50%;
     z-index: 1;
@@ -779,7 +789,6 @@ a.hover-1:hover::before {
 }
 
 @keyframes float {
-
     0%,
     100% {
         transform: translateY(0) rotate(0deg);
@@ -811,7 +820,11 @@ a.hover-1:hover::before {
     transform: translate(-50%, -50%);
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(13, 202, 240, 0.15) 0%, transparent 70%);
+    background: radial-gradient(
+        circle,
+        rgba(13, 202, 240, 0.15) 0%,
+        transparent 70%
+    );
     z-index: 2;
     border-radius: 50%;
 }

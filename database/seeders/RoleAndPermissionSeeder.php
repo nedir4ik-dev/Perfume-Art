@@ -15,7 +15,6 @@ class RoleAndPermissionSeeder extends Seeder
      */
     public function run()
     {
-        // 1. Rugsatlary döretmek (Hemmesini şu ýere sanaw edip goş)
         $permissions = [
             ['name' => 'view-dashboard', 'label' => 'Dashboardy görmek'],
             ['name' => 'manage-roles', 'label' => 'Rollary dolandyrmak'],
@@ -35,14 +34,11 @@ class RoleAndPermissionSeeder extends Seeder
             Permission::updateOrCreate(['name' => $p['name']], $p);
         }
 
-        // 2. ADMIN Roly we ähli rugsatlar
         $adminRole = Role::updateOrCreate(['name' => 'admin'], ['label' => 'Administrator']);
         $adminRole->permissions()->sync(Permission::pluck('id'));
 
-        // 3. MODERATOR Roly we çäklidilýän rugsatlar
         $moderatorRole = Role::updateOrCreate(['name' => 'moderator'], ['label' => 'Moderator']);
 
-        // Moderator diňe Dashboard, Haryt we Sargyt görüp bilsin (Rollar we Userler oňa ýapyk)
         $modPermissions = Permission::whereIn('name', [
             'view-dashboard',
             'manage-products',
@@ -50,14 +46,11 @@ class RoleAndPermissionSeeder extends Seeder
         ])->pluck('id');
         $moderatorRole->permissions()->sync($modPermissions);
 
-        // 4. Bar bolan ulanyjylara rollaryny paýlamak
-        // Admin (Nedirsha)
         $adminUser = User::where('username', 'nedir')->first();
         if ($adminUser) {
             $adminUser->update(['role_id' => $adminRole->id, 'is_admin' => 1]);
         }
 
-        // Moderator
         $modUser = User::where('username', 'moderator')->first();
         if ($modUser) {
             $modUser->update(['role_id' => $moderatorRole->id, 'is_admin' => 1]);

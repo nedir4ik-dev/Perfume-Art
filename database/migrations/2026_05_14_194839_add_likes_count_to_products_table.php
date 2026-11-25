@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->unsignedInteger('likes_count')->default(0); // Like sanyny saklajak sütün
+            $table->unsignedInteger('likes_count')->default(0);
         });
     }
 

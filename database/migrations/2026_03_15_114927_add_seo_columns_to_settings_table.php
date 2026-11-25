@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
             $table->string('seo_keywords')->nullable();
-            $table->string('og_image')->nullable(); // Sosyal mediýa üçin surat
+            $table->string('og_image')->nullable();
         });
     }
 

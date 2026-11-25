@@ -2,7 +2,7 @@
 
 @section('content')
 @php
-$locale = app()->getLocale();
+    $locale = app()->getLocale();
 @endphp
 
 <style>
@@ -10,11 +10,9 @@ $locale = app()->getLocale();
     .marquee-container {
         width: 100%;
         overflow: hidden;
-        background: rgba(31, 30, 30, 0.09);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        background: var(--bg-surface);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
         padding: 12px 0;
         white-space: nowrap;
         position: relative;
@@ -33,7 +31,7 @@ $locale = app()->getLocale();
     }
 
     .marquee-item {
-        color: rgba(255, 255, 255, 0.8);
+        color: var(--text-secondary);
         font-size: 14px;
         font-weight: 500;
         display: flex;
@@ -43,13 +41,8 @@ $locale = app()->getLocale();
     }
 
     @keyframes scroll-marquee {
-        0% {
-            transform: translateX(0);
-        }
-
-        100% {
-            transform: translateX(-50%);
-        }
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
     }
 
     .carousel-item {
@@ -57,13 +50,19 @@ $locale = app()->getLocale();
     }
 
     .carousel-indicators [data-bs-target] {
-        background-color: rgba(255, 255, 255, 0.4);
+        background-color: var(--text-secondary);
         transition: all 0.3s ease;
     }
 
     .carousel-indicators .active {
-        background-color: #0dcaf0 !important;
+        background-color: var(--accent-color) !important;
         width: 35px !important;
+    }
+
+    .hero-card-wrapper {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        box-shadow: var(--card-shadow);
     }
 
     .custom-row-height {
@@ -87,47 +86,19 @@ $locale = app()->getLocale();
     }
 
     @media (min-width: 992px) {
-        .custom-row-height {
-            min-height: 520px;
-        }
-
-        .hero-main-img {
-            max-height: 420px !important;
-        }
-
-        .hero-desc-text {
-            font-size: 1.25rem !important;
-        }
-
-        .hero-main-title {
-            font-size: 3.8rem !important;
-        }
-
-        .style-badge {
-            font-size: 0.85rem;
-        }
-
-        .hero-btn {
-            font-size: 1rem !important;
-        }
-
-        .border-end-lg {
-            border-right: 1px solid rgba(108, 117, 125, 0.25) !important;
-        }
+        .custom-row-height { min-height: 520px; }
+        .hero-main-img { max-height: 420px !important; }
+        .hero-desc-text { font-size: 1.25rem !important; }
+        .hero-main-title { font-size: 3.8rem !important; }
+        .style-badge { font-size: 0.85rem; }
+        .hero-btn { font-size: 1rem !important; }
+        .border-end-lg { border-right: 1px solid var(--border-color) !important; }
     }
 
     @media (max-width: 768px) {
-        .marquee-container {
-            padding: 10px 0;
-        }
-
-        .marquee-item {
-            font-size: 13px;
-        }
-
-        .marquee-content {
-            animation-duration: 25s;
-        }
+        .marquee-container { padding: 10px 0; }
+        .marquee-item { font-size: 13px; }
+        .marquee-content { animation-duration: 25s; }
     }
 
     /* Live Search Popover */
@@ -141,12 +112,10 @@ $locale = app()->getLocale();
         left: 0;
         right: 0;
         z-index: 9999;
-        background: rgba(31, 30, 30, 0.95);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
         border-radius: 14px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        box-shadow: var(--card-shadow);
         margin-top: 8px;
         max-height: 350px;
         overflow-y: auto;
@@ -157,11 +126,11 @@ $locale = app()->getLocale();
         display: flex;
         align-items: center;
         padding: 12px 18px;
-        color: #e0e0e0;
+        color: var(--text-primary);
         text-decoration: none;
         font-size: 14px;
         transition: all 0.2s ease;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        border-bottom: 1px solid var(--border-color);
     }
 
     .search-dropdown-item:last-child {
@@ -169,8 +138,8 @@ $locale = app()->getLocale();
     }
 
     .search-dropdown-item:hover {
-        background: rgba(255, 255, 255, 0.08);
-        color: #0dcaf0;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--accent-color);
         padding-left: 22px;
     }
 
@@ -179,20 +148,18 @@ $locale = app()->getLocale();
         opacity: 0.6;
     }
 
-    /* Full-Width Infinite Brands Marquee (Fixed Overflow Bug) */
+    /* Full-Width Infinite Brands Marquee */
     .brands-marquee-fullwidth {
-        width: 100%;
+        width: 100vw;
         position: relative;
         left: 50%;
         right: 50%;
-        margin-left: -50%;
-        margin-right: -50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
         overflow: hidden;
-        background: rgba(55, 54, 54, 0.12);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        background: var(--bg-surface);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
         padding: 22px 0;
         white-space: nowrap;
 
@@ -235,13 +202,8 @@ $locale = app()->getLocale();
     }
 
     @keyframes scroll-brands-seamless {
-        0% {
-            transform: translateX(0);
-        }
-
-        100% {
-            transform: translateX(-50%);
-        }
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
     }
 </style>
 
@@ -250,13 +212,13 @@ $locale = app()->getLocale();
         <div class="dropdown">
             <button class="btn btn-outline-light dropdown-toggle border-0 px-3 py-2 rounded-pill shadow-xl d-flex align-items-center justify-content-center"
                 type="button" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false"
-                style="background: rgba(66, 65, 65, 0.57); height: 42px; min-width: 95px; font-size: 13px;">
+                style="background: var(--bg-surface); height: 42px; min-width: 95px; font-size: 13px; border: 1px solid var(--border-color);">
                 <i class="bi bi-translate me-2 text-info" style="font-size: 15px;"></i>
                 <span class="text-uppercase fw-bold">{{ $locale }}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-2 p-2"
                 aria-labelledby="langDropdown"
-                style="background: rgba(31, 30, 30, 0.85); backdrop-filter: blur(10px); border-radius: 15px; min-width: 140px; z-index: 1000;">
+                style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 15px; min-width: 140px; z-index: 1000;">
                 <li><a class="dropdown-item rounded-3 text-white py-2" href="{{ route('locale', 'tm') }}">🇹🇲 Turkmen</a></li>
                 <li><a class="dropdown-item rounded-3 text-white py-2" href="{{ route('locale', 'ru') }}">🇷🇺 Русский</a></li>
                 <li><a class="dropdown-item rounded-3 text-white py-2" href="{{ route('locale', 'en') }}">🇺🇸 English</a></li>
@@ -275,7 +237,7 @@ $locale = app()->getLocale();
             @endforeach
         </div>
 
-        <div class="carousel-inner rounded-4 text-white" style="background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+        <div class="carousel-inner rounded-4 hero-card-wrapper text-white">
             @foreach($advertisements as $index => $heroAd)
             <div class="carousel-item {{ $index === 0 ? 'active' : '' }} px-3 px-xl-5 py-4 py-lg-5">
                 <div class="row flex-column-reverse flex-lg-row align-items-center g-4 custom-row-height">
@@ -283,18 +245,18 @@ $locale = app()->getLocale();
                     <div class="col-lg-7 text-center text-lg-start position-relative py-2" style="z-index: 20;">
 
                         @php
-                        $badge = $heroAd->{'badge_' . $locale} ?? null;
-                        $title = $heroAd->{'title_' . $locale} ?? '';
-                        $desc = $heroAd->{'description_' . $locale} ?? null;
+                            $badge = $heroAd->{'badge_' . $locale} ?? null;
+                            $title = $heroAd->{'title_' . $locale} ?? '';
+                            $desc  = $heroAd->{'description_' . $locale} ?? null;
                         @endphp
 
                         @if($badge)
-                        <span class="badge bg-dark bg-opacity-100 text-light text-uppercase mb-3 px-3 py-2 rounded-pill fw-bold style-badge">
+                        <span class="badge bg-dark text-light text-uppercase mb-3 px-3 py-2 rounded-pill fw-bold style-badge" style="border: 1px solid var(--border-color);">
                             {{ $badge }}
                         </span>
                         @endif
 
-                        <h1 class="display-4 display-lg-2 fw-bold text-white mb-3 hero-main-title" style="line-height: 1.1; text-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+                        <h1 class="display-4 display-lg-2 fw-bold text-white mb-3 hero-main-title" style="line-height: 1.1;">
                             {{ $title }}
                         </h1>
 
@@ -353,7 +315,7 @@ $locale = app()->getLocale();
     <div class="row mb-5 text-center">
         <div class="col-12">
             <div class="display-4 fw-bold text-white">{{ get_setting('site_name') ?? '' }}</div>
-            <div class="text-white mt-2">{{ __('app.main-p-tag') }}</div>
+            <div class="text-white-50 mt-2">{{ __('app.main-p-tag') }}</div>
         </div>
     </div>
 
@@ -361,10 +323,10 @@ $locale = app()->getLocale();
         <div class="col-md-7 col-lg-5">
             <div class="search-wrapper position-relative">
                 <input type="text" id="product-search"
-                    class="form-control bg-dark bg-opacity-25 border-white border-opacity-10 text-white px-4 py-2 shadow-none"
+                    class="form-control text-white px-4 py-2 shadow-none"
                     placeholder="{{ __('app.search') }}"
                     autocomplete="off"
-                    style="background-color: rgba(31, 30, 30, 0.51); backdrop-filter: blur(10px); color: white; border: 1px solid rgba(255,255,255,0.1)">
+                    style="background-color: var(--bg-surface); color: white; border: 1px solid var(--border-color);">
                 <i class="bi bi-search position-absolute end-0 top-50 translate-middle-y me-3 text-white-50"></i>
 
                 <div id="search-dropdown" class="search-dropdown"></div>
@@ -393,14 +355,15 @@ $locale = app()->getLocale();
         @php
         $brandLogos = ['chanel.png', 'dior.png', 'tomford.png', 'creed.png', 'versace.png'];
         @endphp
+
         @for ($i = 0; $i < 2; $i++)
             @foreach($brandLogos as $logo)
             <div class="brand-marquee-item">
-            <img src="{{ asset('images/brands/' . $logo) }}" alt="Brand" class="brand-img" loading="lazy" decoding="async">
+                <img src="{{ asset('images/brands/' . $logo) }}" alt="Brand" class="brand-img" loading="lazy" decoding="async">
+            </div>
+            @endforeach
+        @endfor
     </div>
-    @endforeach
-    @endfor
-</div>
 </div>
 @endsection
 
@@ -415,83 +378,17 @@ $locale = app()->getLocale();
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Touch events optimization for marquee
         const marqueeContainer = document.querySelector('.marquee-container');
         const marqueeContent = document.querySelector('.marquee-content');
 
         if (marqueeContainer && marqueeContent) {
             marqueeContainer.addEventListener('touchstart', () => {
                 marqueeContent.style.animationPlayState = 'paused';
-            }, {
-                passive: true
-            });
+            }, { passive: true });
 
             marqueeContainer.addEventListener('touchend', () => {
                 marqueeContent.style.animationPlayState = 'running';
-            }, {
-                passive: true
-            });
-        }
-
-        // Live Search Optimization with AbortController
-        const searchInput = document.getElementById('product-search');
-        const searchDropdown = document.getElementById('search-dropdown');
-        let timeout = null;
-        let controller = null;
-
-        if (searchInput && searchDropdown) {
-            searchInput.addEventListener('input', function(e) {
-                const term = e.target.value.trim();
-                clearTimeout(timeout);
-
-                if (controller) {
-                    controller.abort(); // Köne haýyşy togtatmak
-                }
-
-                if (term === "") {
-                    searchDropdown.style.display = "none";
-                    searchDropdown.innerHTML = "";
-                    return;
-                }
-
-                timeout = setTimeout(() => {
-                    controller = new AbortController();
-                    fetch(`/search-products?term=${encodeURIComponent(term)}`, {
-                            signal: controller.signal
-                        })
-                        .then(res => res.json())
-                        .then(products => {
-                            if (products.length === 0) {
-                                searchDropdown.innerHTML = `<div class="p-3 text-center text-white-50 small"><i class="bi bi-search me-1"></i> Hiç zat tapylmady</div>`;
-                            } else {
-                                searchDropdown.innerHTML = products.map(p => `
-                                    <a href="/product/${p.slug}" class="search-dropdown-item">
-                                        <i class="bi bi-search me-3"></i>
-                                        <span class="fw-medium">${p.name}</span>
-                                    </a>
-                                `).join('');
-                            }
-                            searchDropdown.style.display = "block";
-                        })
-                        .catch(err => {
-                            if (err.name !== 'AbortError') {
-                                console.error("Gözleg hatasy:", err);
-                            }
-                        });
-                }, 200);
-            });
-
-            document.addEventListener('click', function(e) {
-                if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
-                    searchDropdown.style.display = "none";
-                }
-            });
-
-            searchInput.addEventListener('focus', function() {
-                if (searchInput.value.trim() !== "" && searchDropdown.children.length > 0) {
-                    searchDropdown.style.display = "block";
-                }
-            });
+            }, { passive: true });
         }
     });
 </script>

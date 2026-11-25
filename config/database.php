@@ -62,11 +62,10 @@ return [
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 (PHP_VERSION_ID >= 80500 ? Mysql::ATTR_SSL_CA : PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
-            // TÄZE GOŞULMALY BÖLEK:
             'dump' => [
-                'dump_binary_path' => '/Applications/XAMPP/bin', // XAMPP-yň bin bukjasy
+                'dump_binary_path' => '/Applications/XAMPP/bin',
                 'use_single_transaction' => true,
-                'timeout' => 60 * 5, // 5 minut
+                'timeout' => 60 * 5,
             ],
         ],
 

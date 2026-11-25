@@ -221,7 +221,6 @@
             });
         }
 
-        // Sene Goragy
         const datetimeInput = document.getElementById('discount_expires_at');
         if (datetimeInput) {
             const now = new Date();

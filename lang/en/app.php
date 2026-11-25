@@ -594,5 +594,4 @@ return [
     'cms-page-edit-status-active' => 'Page Active',
     'cms-page-edit-update-btn' => 'Update Page',
     'cms-page-edit-go-back-btn' => 'Go Back',
-
 ];

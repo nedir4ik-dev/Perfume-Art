@@ -257,7 +257,6 @@
 <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- 1. Typing Effect Logikasy ---
         const element = document.getElementById('typing-effect');
         const text = "Perfume Art";
 
@@ -282,14 +281,10 @@
                 }
             }
             typeWriter();
-        }
 
-        // --- 2. Notification Sesini Çalýan Funksiýa ---
         function playNotificationSound() {
             try {
-                const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
 
-                // Birinji owadan ton (D5)
                 const osc1 = audioCtx.createOscillator();
                 const gain1 = audioCtx.createGain();
                 osc1.type = 'sine';
@@ -297,9 +292,7 @@
                 gain1.gain.setValueAtTime(0.3, audioCtx.currentTime);
                 gain1.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
                 osc1.connect(gain1);
-                gain1.connect(audioCtx.destination);
 
-                // Ikinji owadan ton (A5)
                 const osc2 = audioCtx.createOscillator();
                 const gain2 = audioCtx.createGain();
                 osc2.type = 'sine';
@@ -318,7 +311,6 @@
             }
         }
 
-        // --- 3. Her 10 Minutdan Barlag Sazlamasy ---
         setInterval(function() {
             fetch("{{ route('admin.orders.check') }}", {
                     headers: {
@@ -329,21 +321,18 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.has_new) {
-                        // Toast-yň içini täzelemek
                         document.getElementById('toastCustomerName').innerText = "Müşderi: " + data.customer;
                         document.getElementById('toastOrderAmount').innerText = "Jemi: " + parseFloat(data.amount).toFixed(2) + " TMT";
 
-                        // Toast-y ekranda görkezmek
                         const toastEl = document.getElementById('newOrderToast');
                         const bsToast = new bootstrap.Toast(toastEl);
                         bsToast.show();
 
-                        // Sesi çalmak
                         playNotificationSound();
                     }
                 })
                 .catch(error => console.error("Order Check Error:", error));
-        }, 600000); // 600000 ms = 10 minut
+        }, 600000);
 
     });
 </script>

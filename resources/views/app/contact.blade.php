@@ -52,7 +52,6 @@
 </style>
 
 <div class="container mt-4">
-    {{-- Dil saýlamak --}}
     <div class="d-flex justify-content-end mb-4">
         <div class="dropdown">
             <button class="btn btn-outline-light dropdown-toggle border-0 px-3 py-2 rounded-pill shadow-xl d-flex align-items-center justify-content-center"
@@ -133,7 +132,6 @@
                             </a>
                         </div>
 
-                        {{-- TÄZE: LIQUID GLASS IŞ WAGTY (GOOGLE MAPS STILDE) --}}
                         @php
                         $now = \Carbon\Carbon::now();
                         $dayOfWeek = $now->dayOfWeek; // 0 = Ýekşenbe, 1 = Duşenbe ...
@@ -171,7 +169,6 @@
                                     <i class="bi bi-chevron-down text-white-50 small"></i>
                                 </div>
 
-                                {{-- Dropdown Yapylýan/Açylýan Hepdelik Tertip --}}
                                 <div class="collapse mt-2" id="workingHoursCollapse">
                                     <div class="working-hours-list p-2">
                                         <div class="working-day-item d-flex justify-content-between align-items-center {{ $dayOfWeek == 1 ? 'today' : '' }}">
@@ -210,7 +207,6 @@
                 </div>
             </div>
 
-            {{-- Kontakt Forma --}}
             <div class="col-md-8">
                 <div class="bg-dark bg-opacity-10 border border-white border-opacity-25 rounded-4 p-4 p-lg-5 shadow-lg"
                     style="background-color: rgba(31, 30, 30, 0.51); backdrop-filter: blur(10px); color: white;">
@@ -262,7 +258,6 @@
                 <div class="bg-dark bg-opacity-10 border border-white border-opacity-25 rounded-4 p-3 shadow-lg position-relative"
                     style="background-color: rgba(31, 30, 30, 0.51); backdrop-filter: blur(10px); min-height: 400px;">
 
-                    {{-- Internet bolmadyk ýagdaýynda (Fallback UI) --}}
                     <div id="map-offline-fallback" class="position-absolute top-50 start-50 translate-middle text-center text-white-50 w-100 px-3" style="z-index: 1;">
                         <i class="bi bi-wifi-off display-4 text-danger mb-2 d-block"></i>
                         <div class="fw-bold text-white fs-5">{{ __('app.contact-page-map-offline-feedback-title') }}</div>
@@ -272,7 +267,6 @@
                         </button>
                     </div>
 
-                    {{-- Actual Map Iframe --}}
                     <div class="map-wrapper rounded-4 overflow-hidden position-relative" style="z-index: 2;">
                         {!! get_setting('site_map_iframe') ?? get_setting('map_iframe') !!}
                     </div>

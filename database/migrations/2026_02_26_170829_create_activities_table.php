@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            $table->string('ip_address', 45)->nullable(); // Ulanyjynyň IP adresi
-            $table->string('user_agent')->nullable();    // Haýsy brauzer we enjam (Windows, iPhone we s.m.)
-            $table->string('url')->nullable();           // Haýsy sahypa girdi
-            $table->string('method')->nullable();        // GET ýa-da POST
-            $table->integer('visit_count')->default(1);  // Şu gün näçe gezek girdi
-            $table->timestamp('last_activity')->useCurrent(); // Iň soňky hereket wagty
-            $table->integer('duration')->default(0);     // Sahypada sarp eden wagty (sekuntda)
+            $table->string('ip_address', 45)->nullable();
+            $table->string('user_agent')->nullable();
+            $table->string('url')->nullable();    
+            $table->string('method')->nullable();
+            $table->integer('visit_count')->default(1);
+            $table->timestamp('last_activity')->useCurrent();
+            $table->integer('duration')->default(0);
             $table->timestamps();
         });
     }

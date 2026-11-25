@@ -29,18 +29,14 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectUsersTo(fn() => route('admin.dashboard'));
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        // Loglama üçin has durnukly usul
         $exceptions->report(function (\Throwable $e) {
             $request = app(Request::class);
 
-            // Diňe Admin panelindäki ýalňyşlyklary loglaýarys
             if ($request->is('admin*') && class_exists(ActivityLogger::class)) {
                 try {
                     $logger = new ActivityLogger();
                     $status = method_exists($e, 'getStatusCode') ? $e->getStatusCode() : 500;
 
-                    // Emeli response döretmekden gaça durýarys, göni loglaýarys
-                    // Ýöne middleware handle-y garaşýan bolsa:
                     $response = response()->json(['message' => $e->getMessage()], $status < 100 || $status > 599 ? 500 : $status);
                     $response->exception = $e;
 
@@ -48,7 +44,6 @@ return Application::configure(basePath: dirname(__DIR__))
                         return $response;
                     });
                 } catch (\Exception $ex) {
-                    // Eger loglamanyň özi hata berse, proýekti duruzmazlygy üçin
                 }
             }
         });

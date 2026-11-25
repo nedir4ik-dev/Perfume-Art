@@ -43,6 +43,34 @@
     @endif
 
     <style>
+        :root {
+            --bg-primary: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-card: rgba(30, 30, 30, 0.85);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.65);
+            --accent-color: #0dcaf0;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-bs-theme="light"] {
+            --bg-primary: #f8f9fa;
+            --bg-surface: #ffffff;
+            --bg-card: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --accent-color: #0d6efd;
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+        }
+
+        body {
+            background-color: var(--bg-primary) !important;
+            background-image: none !important;
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
         .promo-overlay {
             position: fixed;
             top: 0;
@@ -189,8 +217,8 @@
     </style>
 </head>
 
-<body class="bg-dark">
-    <div class="bg-image d-flex flex-column min-vh-100">
+<body>
+    <div class="d-flex flex-column min-vh-100">
         @if(!Request::is('admin*'))
         @include('app.navbar')
         @endif

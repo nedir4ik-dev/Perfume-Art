@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->integer('discount_percent')->default(0); // Meselem: 15 ýazylsa, 15% diýmek
+            $table->integer('discount_percent')->default(0);
         });
     }
 

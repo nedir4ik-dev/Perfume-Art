@@ -21,7 +21,6 @@ class ActivityController extends Controller
 
         $query = Activity::with('user');
 
-        // 1. Gözleg süzgüçi
         if ($request->filled('search')) {
             $search = $request->input('search');
             $query->where(function ($q) use ($search) {
@@ -34,7 +33,6 @@ class ActivityController extends Controller
             });
         }
 
-        // 2. ⚡ LIVE FILTER STATUS BARLAGY (Täze goşulmaly ýer)
         if ($request->filled('status')) {
             $status = $request->input('status');
             if ($status === 'success') {
@@ -46,11 +44,8 @@ class ActivityController extends Controller
             }
         }
 
-        // Loglary tertipläp alyrys
         $activities = $query->orderBy('created_at', 'desc')->paginate(20)->withQueryString();
-
-        $oldestLog = Activity::oldest()->first();
-        $cleanupDate = $oldestLog && $oldestLog->created_at ? $oldestLog->created_at->addDays(30) : null;
+        $cleanupDate = now()->addMonthNoOverflow()->startOfMonth();
 
         if ($request->ajax()) {
             return view('admin.activities.partials._activity_rows', compact('activities'))->render();
@@ -58,10 +53,7 @@ class ActivityController extends Controller
 
         return view('admin.activities.index', compact('activities', 'cleanupDate'));
     }
-
-    /**
-     * Anyk bir hereketiň detaly, IP Analizi, Risk Score & Performance Metrics
-     */
+    
     public function showActivity(Request $request, $id)
     {
         if (!auth()->user()->hasPermission('view-logs')) {
@@ -97,23 +89,19 @@ class ActivityController extends Controller
                         }
                     }
                 } catch (\Exception $e) {
-                    // Timeout utulanda awtomatiki catch edýär
                 }
                 return ['status' => 'fail'];
             });
         }
 
-        // 2. KIBER-HOWPSUZLYK: RISK DEREJESINI (RISK SCORE) HASAPLAMAK
         $security = $this->calculateSecurityMetrics($activity);
 
-        // 3. PERFORMANCE METRICS (Tizlik we RAM Sarp Edilişi)
         $performance = [
             'execution_time' => $activity->execution_time ?? ($activity->response_time ?? rand(45, 180)) . ' ms',
             'memory_usage'   => $activity->memory_usage ?? rand(3, 8) . '.' . rand(1, 9) . ' MB',
             'http_protocol'  => $request->server('SERVER_PROTOCOL', 'HTTP/1.1'),
         ];
 
-        // 4. IP TARYHY
         $userHistory = Activity::where('ip_address', $activity->ip_address)
             ->where('id', '!=', $id)
             ->latest()
@@ -128,10 +116,9 @@ class ActivityController extends Controller
      */
     private function calculateSecurityMetrics($activity)
     {
-        $score = 0; // Baseline Risk Score (0-100)
+        $score = 0;
         $reasons = [];
 
-        // A. Status Koda Seretmek
         $statusCode = $activity->status_code ?? 200;
         if ($statusCode >= 500) {
             $score += 35;
@@ -144,8 +131,6 @@ class ActivityController extends Controller
             $reasons[] = 'Sahypa tapylmady (404 Not Found)';
         }
 
-        // B. Köp Zapros Ugratmak (Brute Force / Rate Limit Barlagy)
-        // DÜZETME: ->copy()->subMinutes(5) ulanyldy, sebäbi created_at maglumatynyň özi üýtgemeli däl
         $recentCount = Activity::where('ip_address', $activity->ip_address)
             ->where('created_at', '>=', $activity->created_at->copy()->subMinutes(5))
             ->where('created_at', '<=', $activity->created_at)
@@ -159,13 +144,11 @@ class ActivityController extends Controller
             $reasons[] = 'Ýokary işjeňlik tespit edildi (' . $recentCount . ' zapros)';
         }
 
-        // C. Method Risk Barlagy
         if (in_array(strtoupper($activity->method ?? 'GET'), ['DELETE', 'PUT', 'PATCH'])) {
             $score += 10;
             $reasons[] = 'Serwerdäki maglumat üýtgedildi/pozuldy (' . $activity->method . ')';
         }
 
-        // D. Risk Belligi & Klasy
         if ($score >= 60) {
             $level = 'HIGH RISK';
             $badgeClass = 'bg-danger text-white';
@@ -180,7 +163,6 @@ class ActivityController extends Controller
             $borderClass = 'border-success';
         }
 
-        // E. Traffic Source (Referer) Parsing
         $referer = $activity->referer ?? request()->header('referer') ?? 'Direct / Unknown';
         $trafficSource = 'Direct Traffic';
         if (str_contains(strtolower($referer), 'google')) $trafficSource = 'Google Search';
@@ -230,7 +212,6 @@ class ActivityController extends Controller
                 $query->where('created_at', '<=', now()->subDays(30));
                 break;
             case 'all':
-                // Ähli loglary pozar
                 break;
         }
 

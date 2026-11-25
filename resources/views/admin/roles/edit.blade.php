@@ -185,24 +185,20 @@
         const selectAll = document.getElementById('selectAll');
         const checkboxes = document.querySelectorAll('input[name="permissions[]"]');
 
-        // "Hemmesini saýla" gutusynyň statusyny barlaýan funksiýa
         function checkSelectAllStatus() {
             const checkedCount = document.querySelectorAll('input[name="permissions[]"]:checked').length;
             selectAll.checked = (checkboxes.length === checkedCount);
         }
 
         if (selectAll) {
-            // Select All basylanda hemmesini üýtget
             selectAll.addEventListener('change', function() {
                 checkboxes.forEach(checkbox => checkbox.checked = this.checked);
             });
 
-            // Her bir checkbox üýtgände "Select All" statusyny täzele
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', checkSelectAllStatus);
             });
 
-            // Sahypa açylanda ilkinji barlag (Edit rejimi üçin möhüm)
             checkSelectAllStatus();
         }
     });

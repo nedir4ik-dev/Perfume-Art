@@ -6,23 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::table('advertisements', function (Blueprint $table) {
-            $table->string('badge')->nullable();
-        });
+        if (Schema::hasTable('advertisements') && !Schema::hasColumn('advertisements', 'badge')) {
+            Schema::table('advertisements', function (Blueprint $table) {
+                $table->string('badge')->nullable();
+            });
+        }
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::table('advertisements', function (Blueprint $table) {
-            //
-        });
+        if (Schema::hasTable('advertisements') && Schema::hasColumn('advertisements', 'badge')) {
+            Schema::table('advertisements', function (Blueprint $table) {
+                $table->dropColumn('badge');
+            });
+        }
     }
 };

@@ -8,7 +8,6 @@
         background: #121212;
     }
 
-    /* Arka fon dizaýny - Garaňky we Blur durnuklylygy */
     .main-content {
         background-color: rgba(31, 30, 30, 0.51) !important;
         backdrop-filter: blur(5px);
@@ -78,14 +77,12 @@
         color: #000;
     }
 
-    /* Progress Bar (Risk Metric) */
     .progress-thin {
         height: 6px;
         border-radius: 10px;
         background: rgba(255, 255, 255, 0.1);
     }
 
-    /* Mobil ekran dizaýn optimizasiýasy */
     @media (max-width: 991.98px) {
         .main-content {
             padding: 12px !important;
@@ -110,13 +107,11 @@
         <div class="container-xl pt-4 pt-sm-5">
 
             <div class="row align-items-center g-3 mb-4 pt-2">
-                {{-- Çep tarap: Sahypanyň ady --}}
                 <div class="col-12 col-sm-4 text-start">
                     <h3 class="text-white fw-bold mb-0">Activity Details</h3>
                     <small class="text-white-50">Log ID: <span class="text-info">#{{ $activity->id ?? 'N/A' }}</span></small>
                 </div>
 
-                {{-- Sag tarap: Dil saýlama we Yza dolanmak düwmesi --}}
                 <div class="col-12 col-sm-8 d-flex justify-content-start justify-content-sm-end align-items-center gap-3">
                     <div class="dropdown">
                         <button class="btn btn-outline-light dropdown-toggle border-0 px-3 py-2 rounded-pill shadow-sm d-flex align-items-center justify-content-center"
@@ -143,7 +138,6 @@
             <div class="row g-3 g-sm-4">
                 <div class="col-lg-8">
 
-                    {{-- 1. Esasy Sanlar we Maglumatlar --}}
                     <div class="info-card p-3 p-sm-4 mb-4">
                         <div class="row text-center stat-grid g-0">
                             <div class="col-6 col-md-3 border-sm-end border-white border-opacity-10">
@@ -189,7 +183,6 @@
                         </div>
                     </div>
 
-                    {{-- 2. TÄZE: SECURITY INSIGHTS & RISK ANALYSIS --}}
                     @if(isset($security))
                     <div class="info-card p-3 p-sm-4 mb-4 {{ $security['border_class'] ?? 'border-info' }}">
                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -201,7 +194,6 @@
                             </span>
                         </div>
 
-                        {{-- Risk Score Progress Bar --}}
                         <div class="progress progress-thin mb-3">
                             <div class="progress-bar {{ str_contains($security['badge_class'], 'danger') ? 'bg-danger' : (str_contains($security['badge_class'], 'warning') ? 'bg-warning' : 'bg-success') }}"
                                 role="progressbar"
@@ -226,7 +218,6 @@
                             </div>
                         </div>
 
-                        {{-- Risk Sebäpleri bar bolsa --}}
                         @if(!empty($security['reasons']))
                         <div class="mt-3 pt-3 border-top border-white border-opacity-10">
                             <small class="text-white-50 d-block mb-1" style="font-size: 10px;">DETECTED ANOMALIES / REASONS:</small>
@@ -240,7 +231,6 @@
                     </div>
                     @endif
 
-                    {{-- 3. Error Message we Payload --}}
                     @if(!empty($activity->error_message) || !empty($activity->payload))
                     <div class="info-card p-3 p-sm-4 mb-4 position-relative">
 
@@ -268,7 +258,6 @@
                     </div>
                     @endif
 
-                    {{-- 4. Ulanyjynyň Geçmiş Taryhy --}}
                     <div class="info-card p-3 p-sm-4 mb-4">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h6 class="text-white fw-bold mb-0"><i class="bi bi-clock-history me-2"></i>Recent Activity Timeline</h6>
@@ -298,7 +287,6 @@
                 </div>
 
                 <div class="col-lg-4">
-                    {{-- 5. TÄZE: PERFORMANCE METRICS --}}
                     @if(isset($performance))
                     <div class="info-card p-4 mb-4">
                         <h6 class="text-white-50 small text-uppercase mb-3 tracking-wider" style="font-size: 11px;">
@@ -331,7 +319,6 @@
                     </div>
                     @endif
 
-                    {{-- 6. Ulanyjy Profil Maglumaty --}}
                     <div class="info-card p-4 mb-4 text-center">
                         <h6 class="text-white-50 small text-uppercase mb-3 text-start tracking-wider" style="font-size: 11px;">User Information</h6>
                         @if($activity->user)
@@ -351,7 +338,6 @@
                         @endif
                     </div>
 
-                    {{-- 7. Geo Analitika --}}
                     <div class="info-card overflow-hidden mb-4">
                         <div class="p-4 text-center border-bottom border-white border-opacity-10 bg-dark bg-opacity-5">
                             <h6 class="text-white text-uppercase fw-bold mb-0 small" style="letter-spacing: 2px;">
@@ -394,7 +380,6 @@
                         </div>
                     </div>
 
-                    {{-- 8. Environment & Browser --}}
                     <div class="info-card p-4 mb-4">
                         <h6 class="text-white-50 small text-uppercase mb-4 tracking-wider" style="font-size: 11px;">Environment & Browser</h6>
 

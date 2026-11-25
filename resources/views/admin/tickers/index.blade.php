@@ -325,12 +325,11 @@
 <script>
     const inputIcon = document.getElementById('input-icon');
     const inputColor = document.getElementById('input-color');
-    let activeLang = 'tm'; // Default başlangyç tab
+    let activeLang = 'tm';
 
-    // Haýsy tab-a basylsa, şol diliň inputyny yzarlaýar
     document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
         tab.addEventListener('shown.bs-tab', function(e) {
-            const targetId = e.target.id; // tm-tab, ru-tab, en-tab
+            const targetId = e.target.id;
             activeLang = targetId.split('-')[0];
             updatePreview();
         });
@@ -360,7 +359,6 @@
         }
     }
 
-    // Ähli inputlara diňleýji goşmak
     document.querySelectorAll('.ticker-input').forEach(input => {
         input.addEventListener('input', updatePreview);
     });

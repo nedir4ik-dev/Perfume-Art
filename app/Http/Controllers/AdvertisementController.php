@@ -21,7 +21,6 @@ class AdvertisementController extends Controller
 
     public function store(Request $request)
     {
-        // Türkmençe hökmany, beýlekiler meýletin barlagdan geçýär
         $request->validate([
             'title_tm' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
@@ -29,7 +28,6 @@ class AdvertisementController extends Controller
 
         $ad = new Advertisement();
 
-        // Köp dilli sütünleri ýazdyrmak
         $ad->title_tm = $request->title_tm;
         $ad->title_ru = $request->title_ru;
         $ad->title_en = $request->title_en;
@@ -42,7 +40,6 @@ class AdvertisementController extends Controller
         $ad->description_ru = $request->description_ru;
         $ad->description_en = $request->description_en;
 
-        // Ortak sütünler
         $ad->link = $request->link;
         $ad->seconds = $request->seconds ?? 5;
         $ad->is_active = $request->has('is_active');
@@ -64,7 +61,6 @@ class AdvertisementController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Update edilende-de TM dili hökmany barlanýar
         $request->validate([
             'title_tm' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
@@ -72,7 +68,6 @@ class AdvertisementController extends Controller
 
         $ad = Advertisement::findOrFail($id);
 
-        // Köp dilli sütünleri täzelemek
         $ad->title_tm = $request->title_tm;
         $ad->title_ru = $request->title_ru;
         $ad->title_en = $request->title_en;
@@ -85,7 +80,6 @@ class AdvertisementController extends Controller
         $ad->description_ru = $request->description_ru;
         $ad->description_en = $request->description_en;
 
-        // Ortak sütünler
         $ad->link = $request->link;
         $ad->seconds = $request->seconds ?? 5;
         $ad->is_active = $request->has('is_active');

@@ -131,20 +131,17 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Laraberg obýektiniň barlygyny barlaýarys
         if (typeof Laraberg !== 'undefined') {
 
-            // Täze wersiýalarda init ýa-da initialize funksiýasyny awtomatiki saýlaýar
             const initLaraberg = Laraberg.initialize || Laraberg.init;
 
             if (typeof initLaraberg === 'function') {
                 initLaraberg('editor', {
                     sidebar: true,
-                    laravelFilemanager: false // Häzirlikçe munuň ýalňyşlyk bermezligi üçin false edeliň
+                    laravelFilemanager: false
                 });
                 console.log("Laraberg kemsiz işe girizildi!");
             } else {
-                // Eger obýekt bar bolup, initialize funksiýasy başgaça bolsa, bütin obýekti konsola çykaralyň
                 console.error("Laraberg bar, ýöne init funksiýasy tapylmady. Obýektiň wezipeleri:", Laraberg);
             }
 

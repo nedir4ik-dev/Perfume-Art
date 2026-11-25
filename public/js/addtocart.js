@@ -1,8 +1,3 @@
-/**
- * PERFUME ART - SEBET LOGIKASY (FULL OPTIMIZED & FIXED)
- */
-
-// Serwerden maglumatlary diňe gerek wagty çagyrýan aýratyn funksiýa
 function loadCartData() {
     fetch("/cart/get-data")
         .then((res) => {
@@ -16,7 +11,6 @@ function loadCartData() {
 }
 
 function updateCartUI(cartData) {
-    // Eger maglumat gelmedik bolsa, döwre girmesiz ýaly göni duruzýarys
     if (!cartData) return;
 
     const container = document.getElementById("cart-items-container");
@@ -33,7 +27,6 @@ function updateCartUI(cartData) {
         const keys = Object.keys(cart);
 
         if (keys.length === 0) {
-            // Sebet boş bolsa
             container.innerHTML = `
                 <div class="text-center mt-5">
                     <i class="bi bi-cart-x text-secondary" style="font-size: 3rem;"></i>
@@ -52,7 +45,6 @@ function updateCartUI(cartData) {
                 );
             }
         } else {
-            // Sebetde haryt bar bolsa
             keys.forEach((id) => {
                 const item = cart[id];
                 container.innerHTML += `
@@ -93,7 +85,6 @@ function updateCartUI(cartData) {
     }
 }
 
-// SEBEDE GOŞMAK (POST)
 document.addEventListener("click", function (e) {
     const btn = e.target.closest(".add-to-cart-btn");
     if (btn) {
@@ -127,7 +118,6 @@ document.addEventListener("click", function (e) {
     }
 });
 
-// MUKDARY ÜÝTGETMEK (POST)
 window.changeQty = function (id, delta) {
     const tokenMeta = document.querySelector('meta[name="csrf-token"]');
     if (!tokenMeta) return;
@@ -146,7 +136,6 @@ window.changeQty = function (id, delta) {
         .catch((err) => console.error("Mukdar üýtgetmekde hata:", err));
 };
 
-// Sahypa ilkinji gezek ýüklenende diňe 1 gezek çagyrýarys
 document.addEventListener("DOMContentLoaded", () => {
     const hasCart =
         document.getElementById("cart-items-container") ||

@@ -18,16 +18,14 @@ return new class extends Migration
             $table->string('title_ru')->nullable();
             $table->string('title_en')->nullable();
 
-            // 3 Dilli Düşündiriş (Description)
             $table->text('description_tm')->nullable();
             $table->text('description_ru')->nullable();
             $table->text('description_en')->nullable();
 
-            // Beýleki zerur sütünler
-            $table->string('image'); // Popup suraty
-            $table->string('link')->nullable(); // Basylanda gitjek salgysy
-            $table->integer('seconds')->default(5); // Sahypada näçe sekunt durmalygy
-            $table->boolean('is_active')->default(true); // Aktiw / Passiw statusy
+            $table->string('image');
+            $table->string('link')->nullable();
+            $table->integer('seconds')->default(5);
+            $table->boolean('is_active')->default(true);
 
             $table->timestamps();
         });

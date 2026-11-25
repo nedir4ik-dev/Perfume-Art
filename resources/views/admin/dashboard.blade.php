@@ -472,7 +472,6 @@
                 </div>
             </div>
             
-            {{-- Sonky Gosulan Harytlar --}}
             <div class="liquid-glass p-4 border-0 mb-5">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h5 class="text-white fw-bold mb-0">{{ __('app.admin-page-recent-added') }}</h5>
@@ -512,12 +511,11 @@
                 </div>
             </div>
 
-        </div> {{-- Container-fluid end --}}
-    </div> {{-- Main content end --}}
-</div> {{-- Admin wrapper end --}}
+        </div>
+    </div>
+</div>
 
 <script>
-    // System Health-i AJAX arkaly täzelemek funksiýasy
     function fetchHealth() {
         fetch("{{ route('admin.dashboard') }}?action=get_system_health", {
                 headers: {

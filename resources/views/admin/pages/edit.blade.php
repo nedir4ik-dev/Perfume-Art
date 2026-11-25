@@ -141,7 +141,6 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Laraberg obýektini wersiýa 2.0+ laýyklykda barlap işledýäris
         if (typeof Laraberg !== 'undefined') {
             const initLaraberg = Laraberg.initialize || Laraberg.init;
             

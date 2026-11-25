@@ -1,12 +1,10 @@
 @foreach($activities as $index => $activity)
 @php
-// 🧮 Pagination Tertip Nomerini Hasaplamak (#1, #2, #3...)
 $rowNumber = ($activities->currentPage() - 1) * $activities->perPage() + $loop->iteration;
 
 $statusCode = $activity->status_code ?? 200;
 $level = $activity->level ?? ($statusCode >= 500 ? 'error' : ($statusCode >= 400 ? 'warning' : 'info'));
 
-// Undefined variable $rowClass ýalňyşlygyny öňlemek üçin
 $rowClass = '';
 $borderClass = 'border-bottom border-white border-opacity-10';
 $statusColor = 'text-success';
@@ -21,7 +19,6 @@ $statusColor = 'text-warning';
 $borderClass = 'border-start border-4 border-warning';
 }
 
-// Method reňkleri
 $method = strtoupper($activity->method ?? 'GET');
 $methodBadge = match($method) {
 'POST' => 'bg-info text-dark',
@@ -30,10 +27,8 @@ $methodBadge = match($method) {
 default => 'bg-dark text-info border border-info border-opacity-25'
 };
 
-// User Agent maglumaty
 $agent = strtolower($activity->user_agent ?? '');
 
-// 1. ENJAM GÖRNÜŞI
 if (str_contains($agent, 'iphone') || (str_contains($agent, 'android') && str_contains($agent, 'mobile'))) {
 $deviceIcon = 'bi-phone text-white';
 } elseif (str_contains($agent, 'ipad') || str_contains($agent, 'tablet')) {
@@ -42,7 +37,6 @@ $deviceIcon = 'bi-tablet-landscape text-success';
 $deviceIcon = 'bi-laptop text-white';
 }
 
-// 2. OPERASION ULGAM (OS)
 if (str_contains($agent, 'windows')) {
 $osIcon = 'bi-microsoft text-primary';
 } elseif (str_contains($agent, 'macintosh') || str_contains($agent, 'mac os') || str_contains($agent, 'iphone') || str_contains($agent, 'ipad')) {
@@ -55,7 +49,6 @@ $osIcon = 'bi-ubuntu text-danger';
 $osIcon = 'bi-cpu text-warning';
 }
 
-// 3. BRAUZER
 if (str_contains($agent, 'edg')) {
 $browserIcon = 'bi-browser-edge text-info';
 } elseif (str_contains($agent, 'chrome')) {
@@ -68,19 +61,16 @@ $browserIcon = 'bi-browser-firefox text-danger';
 $browserIcon = 'bi-globe text-muted';
 }
 
-// Onlaýn statusyny barlamak (Soňky 5 minut)
 $isOnline = $activity->updated_at && $activity->updated_at->gt(now()->subMinutes(5));
 @endphp
 
 <tr class="{{ $rowClass }} {{ $borderClass }} align-middle">
-    {{-- 1. TERTIP NUMERI (#) --}}
     <td class="ps-4 py-3 text-center" style="width: 50px;">
         <span class="badge bg-dark text-info border border-info border-opacity-25 rounded-pill px-2 py-1" style="font-size: 10px;">
             #{{ $rowNumber }}
         </span>
     </td>
 
-    {{-- 2. ULANYJY / IP --}}
     <td class="py-3" style="min-width: 160px;">
         <div class="d-flex align-items-center position-relative {{ $isOnline ? 'ps-3' : '' }}">
             @if($isOnline)
@@ -102,28 +92,24 @@ $isOnline = $activity->updated_at && $activity->updated_at->gt(now()->subMinutes
         </div>
     </td>
 
-    {{-- 3. OS (Operasion Ulgam) --}}
     <td class="py-3 text-center" style="width: 70px;">
         <div class="bg-dark bg-opacity-25 rounded-3 p-2 d-inline-block border border-white border-opacity-10" title="Operasion Ulgam">
             <i class="bi {{ $osIcon }} fs-5"></i>
         </div>
     </td>
 
-    {{-- 4. ENJAM --}}
     <td class="py-3 text-center" style="width: 80px;">
         <div class="bg-dark bg-opacity-25 rounded-3 p-2 d-inline-block border border-white border-opacity-10" title="Enjam">
             <i class="bi {{ $deviceIcon }} fs-6"></i>
         </div>
     </td>
 
-    {{-- 5. BRAUZER --}}
     <td class="py-3 text-center" style="width: 80px;">
         <div class="bg-dark bg-opacity-25 rounded-3 p-2 d-inline-block border border-white border-opacity-10" title="Brauzer">
             <i class="bi {{ $browserIcon }} fs-6"></i>
         </div>
     </td>
 
-    {{-- 6. GIREN SAHPASY --}}
     <td class="py-3" style="min-width: 220px;">
         <div class="d-flex flex-column">
             <div class="d-flex align-items-center flex-wrap gap-1">
@@ -147,7 +133,6 @@ $isOnline = $activity->updated_at && $activity->updated_at->gt(now()->subMinutes
         </div>
     </td>
 
-    {{-- 7. WAGTY --}}
     <td class="pe-4 py-3 text-end" style="min-width: 110px;">
         <div class="d-flex flex-column align-items-end">
             <span class="text-white fw-medium small mb-1">
